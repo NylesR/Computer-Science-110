@@ -14,41 +14,41 @@
 
     // Global Variable Initilization
 
-    int playerRPSChoice = 0;
+    int playerRPSChoice = 0; // The variable that holds the players choice in RPS
     int* playerPtrChoice = &playerRPSChoice;
 
-    int cpuRPSChoice = 0;
+    int cpuRPSChoice = 0; // The variable that holds the computers choice in RPS
     int* cpuPtrRPSChoice = &cpuRPSChoice;
 
-    bool validChoice = false;
+    bool validChoice = false; // Decides whether or not the player's choice in RPS is valid
     bool* ptrPChoice = &validChoice;
 
-    const unsigned short int roomSize = 5;
+    const unsigned short int roomSize = 5; // Room size for the game
 
-    int Room[roomSize];
+    int Room[roomSize]; // Array for the rooms
 
-    int correctDoor;
+    int correctDoor; // Variable that holds the correct door
     int* ptrCDoor = new int;
 
-    int playerDChoice;
+    int playerDChoice; // The variable that holds the player's choice for the door.
     int* ptrPlayerDChoice = &playerDChoice;
     
     unsigned short int playerpts = 0;
 
-    bool statusRPS = false;
+    bool statusRPS = false; // Checks to see if the game is rock paper scissors
 
-    bool statusCF = false;
+    bool statusCF = false; // Checks to see if the game is coin flip
 
-    int plyrCoinFlip;
+    int plyrCoinFlip; // The player's input for coinflip
     int* ptrPlyCoin = &plyrCoinFlip;
 
-    int cpuCoinFlip;
+    int cpuCoinFlip; // The computers input for coin flip
     int* ptrCpuCoin = &cpuCoinFlip;
     
-    int playerScore = 0;
+    int playerScore = 0; // The player's score
     int* ptrPlayerScore = &playerScore;
 
-    int lifepool = 1;
+    int lifepool = 1; // The amount of lives the player has
     int* ptrLife = &lifepool;
 
     // ---------------------------
@@ -75,13 +75,13 @@
     
     void doorRPS (); // Occurs whenever a player opens a Rock Paper Scissors door.
 
-    void coinFlipGame(); //
+    void coinFlipGame(); // Runs the coin flip portion of the game
 
-    void cpuCoinInput();
+    void cpuCoinInput(); // Gets the computer's input for the coinflip
 
-    void playerCoinInput();
+    void playerCoinInput(); // Gets the player's input for the coinflip
 
-    void whoWonCF();
+    void whoWonCF(); // Decides who won the coinflip round using a RNG.
 
     // --------------------------
 
@@ -302,24 +302,24 @@ void chooseRoomNumbers(){
         enum plyrRPS {BLANK, pROCK, pPAPER, pSCISSORS};
         enum cpuRPS {cROCK, cPAPER, cSCISSORS};
         
-        if (*playerPtrChoice == *cpuPtrRPSChoice + 1){
+        if (*playerPtrChoice == *cpuPtrRPSChoice + 1){ // +1 to make the cpu choice even to the players since the cpu starts at 0
             
             cout << "Tie game. Choose again" << endl;
             tieGame = true;
-            if(tieGame == true){
+            if(tieGame == true){ // Occurs only when a tie game of Rock Paper Scissors occurs.. Requires the player to play again.
                 *ptrPChoice = false;
                 doorRPS ();
                 return;
             }
         }
-        else if (*playerPtrChoice == pROCK && *cpuPtrRPSChoice == cPAPER){
+        else if (*playerPtrChoice == pROCK && *cpuPtrRPSChoice == cPAPER){ // Rock < Paper
             
             cout << "Computer wins, game over.." << endl;
             --*ptrLife;
             return;
         }
         
-        else if(*playerPtrChoice == pROCK && *cpuPtrRPSChoice == cSCISSORS){
+        else if(*playerPtrChoice == pROCK && *cpuPtrRPSChoice == cSCISSORS){ // Rock > Scissors
             
             cout << "You win! You advance to the next room" << endl << "You gained a point." << endl;
             ++*ptrPlayerScore;
@@ -328,7 +328,7 @@ void chooseRoomNumbers(){
             main();
         }
         
-        else if(*playerPtrChoice == pPAPER && *cpuPtrRPSChoice == cROCK){
+        else if(*playerPtrChoice == pPAPER && *cpuPtrRPSChoice == cROCK){ // Paper > Rock
             
             cout << "You win! You advance to the next room" << endl << "You gained a point." << endl;
             ++*ptrPlayerScore;
@@ -337,19 +337,19 @@ void chooseRoomNumbers(){
             main();
         }
         
-        else if (*playerPtrChoice == pPAPER && *cpuPtrRPSChoice == cSCISSORS){
+        else if (*playerPtrChoice == pPAPER && *cpuPtrRPSChoice == cSCISSORS){ // Paper < Scissors
             
             cout << "Computer wins, game over.." << endl;
             --*ptrLife;
         }
         
-        else if(*playerPtrChoice == pSCISSORS && *cpuPtrRPSChoice == cROCK){
+        else if(*playerPtrChoice == pSCISSORS && *cpuPtrRPSChoice == cROCK){ // Scissors < Rock
                    
             cout << "Computer wins, game over.." << endl;
             --*ptrLife;
         }
         
-        else if(*playerPtrChoice == pSCISSORS && *cpuPtrRPSChoice == cPAPER){
+        else if(*playerPtrChoice == pSCISSORS && *cpuPtrRPSChoice == cPAPER){ // Scissors > Paper
             
             cout << "You win! You advance to the next room" << endl << "You gained a point." << endl;
             ++*ptrPlayerScore;
@@ -416,13 +416,13 @@ void chooseRoomNumbers(){
         if(plyrCoinFlip == HEADS){
             
             *ptrCpuCoin = TAILS;
-            cout << "The computer choses Tails" << endl;
+            cout << "The computer choses Tails" << endl; // If the player chooses Heads the computer chooses Tails by default
             
         }
         else if(plyrCoinFlip == TAILS){
             
             *ptrCpuCoin = HEADS;
-            cout << "The computer choses Heads" << endl;
+            cout << "The computer choses Heads" << endl; // If the player chooses Tails the computer chooses Heads by default
         }
         else{
             
